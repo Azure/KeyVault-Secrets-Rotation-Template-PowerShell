@@ -1,0 +1,129 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "<ServiceType>RG": {
+            "defaultValue": "[resourceGroup().name]",
+            "type": "String",
+            "metadata": {
+                "description": "The name of the resource group where <ServiceType> with keys to rotate has deployed."
+            }
+        },
+        "<ServiceType>Name": {
+            "defaultValue": "[concat(resourceGroup().name, '<ServiceType>2')]",
+            "type": "String",
+            "metadata": {
+                "description": "The name of the <ServiceType> with keys to rotate."
+            }
+        },
+        "keyVaultRG": {
+            "defaultValue": "[resourceGroup().name]",
+            "type": "String",
+            "metadata": {
+                "description": "The name of the resource group where key vault has deployed."
+            }
+        },
+        "keyVaultName": {
+            "defaultValue": "[concat(resourceGroup().name, '-kv')]",
+            "type": "String",
+            "metadata": {
+                "description": "The name of the key vault where key is stored."
+            }
+        },
+        "functionAppName": {
+            "defaultValue": "[concat(resourceGroup().name, '-<ServiceType>key-rotation-fnapp')]",
+            "type": "String",
+            "metadata": {
+                "description": "The name of the function app that you wish to use."
+            }
+		},
+		"secretName": {
+            "defaultValue": "<ServiceType>Key2",
+            "type": "String",
+            "metadata": {
+                "description": "The name of the secret where <ServiceType> keys are stored."
+            }
+        }
+       
+    },
+    "variables": {
+		"eventSubscriptionName": "[concat(parameters('functionAppName'),'-',parameters('secretName'))]"
+		
+    },
+    "resources": [
+         {
+            //EXAMPLE OF GRANTING ACCESS TO STORAGE
+
+            // "name": "storage-grant-access",
+            // "type": "Microsoft.Resources/deployments",
+            // "apiVersion": "2019-10-01",
+            // "subscriptionId": "[subscription().subscriptionId]",
+            // "resourceGroup": "[parameters('storageAccountRG')]",
+            // "dependsOn": [],
+            // "properties": {
+            //     "mode": "Incremental",
+            //     "template": {
+            //         "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+            //         "contentVersion": "1.0.0.0",
+            //         "resources": [
+            //             {
+            //                 "type": "Microsoft.Storage/storageAccounts/providers/roleAssignments",
+            //                 "apiVersion": "2018-09-01-preview",
+            //                 "name": "[concat(parameters('storageAccountName'), '/Microsoft.Authorization/', guid(concat(parameters('storageAccountName'),reference(resourceId('Microsoft.Web/sites', parameters('functionAppName')),'2019-08-01', 'Full').identity.principalId)))]",
+            //                 "dependsOn": [
+                            
+            //                 ],
+            //                 "properties": {
+            //                     "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '81a9662b-bebf-436f-a333-f67b29880f12')]",
+            //                     "principalId": "[reference(resourceId('Microsoft.Web/sites', parameters('functionAppName')),'2019-08-01', 'Full').identity.principalId]"
+            //                 }
+            //             }
+            //         ]
+            //     }
+            // }
+        },
+        {
+            "name": "kv-event-subscription",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "subscriptionId": "[subscription().subscriptionId]",
+            "resourceGroup": "[parameters('keyVaultRG')]",
+            "dependsOn": [],
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": [
+                        {
+		
+                            "type": "Microsoft.KeyVault/vaults/providers/eventSubscriptions",
+                            "apiVersion": "2020-01-01-preview",
+                            "name": "[concat(parameters('keyVaultName'),'/Microsoft.EventGrid/',variables('eventSubscriptionName'))]",
+                            "location": "[resourceGroup().location]",
+                            "dependsOn": [
+                                
+                            ],
+                            "properties": {
+                                "destination": {
+                                    "endpointType": "AzureFunction",
+                                    "properties": {
+                                        "maxEventsPerBatch": 1,
+                                        "preferredBatchSizeInKilobytes": 64,
+                                        "resourceId": "[concat(resourceId('Microsoft.Web/sites', parameters('functionAppName')),'/functions/AKV<ServiceType>Rotation')]"
+                                    }
+                                },
+                                "filter": {
+                                    "subjectBeginsWith": "[parameters('secretName')]",
+                                    "subjectEndsWith": "[parameters('secretName')]",
+                                    "includedEventTypes": ["Microsoft.KeyVault.SecretNearExpiry"]
+                                    
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
