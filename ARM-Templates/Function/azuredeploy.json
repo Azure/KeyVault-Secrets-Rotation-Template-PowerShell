@@ -2,18 +2,18 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-          "<ServiceType>RG": {
+          "[ServiceType]RG": {
             "defaultValue": "[resourceGroup().name]",
             "type": "String",
             "metadata": {
-                "description": "The name of the resource group where <ServiceType> with keys to rotate has deployed."
+                "description": "The name of the resource group where [ServiceType] with keys to rotate has deployed."
             }
         },
-        "<ServiceType>Name": {
-            "defaultValue": "[concat(resourceGroup().name, '<ServiceType>')]",
+        "[ServiceType]Name": {
+            "defaultValue": "[concat(resourceGroup().name, '[ServiceType]')]",
             "type": "String",
             "metadata": {
-                "description": "The name of the <ServiceType> with keys to rotate."
+                "description": "The name of the [ServiceType] with keys to rotate."
             }
         },
         "keyVaultRG": {
@@ -49,10 +49,10 @@
             }
         },
         "secretName": {
-            "defaultValue": "<ServiceType>Key",
+            "defaultValue": "[ServiceType]Key",
             "type": "String",
             "metadata": {
-                "description": "The name of the secret where <ServiceType> keys are stored."
+                "description": "The name of the secret where [ServiceType] keys are stored."
             }
         },
         "repoURL": {
@@ -218,7 +218,7 @@
                                     "properties": {
                                         "maxEventsPerBatch": 1,
                                         "preferredBatchSizeInKilobytes": 64,
-                                        "resourceId": "[concat(resourceId('Microsoft.Web/sites', parameters('functionAppName')),'/functions/AKV<ServiceType>Rotation')]"
+                                        "resourceId": "[concat(resourceId('Microsoft.Web/sites', parameters('functionAppName')),'/functions/AKV[ServiceType]Rotation')]"
                                     }
                                 },
                                 "filter": {
