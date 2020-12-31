@@ -21,7 +21,7 @@ This project framework provides the following features:
 Functions require following information stored in secret as tags:
 
 * $secret.Tags["ValidityPeriodDays"] - number of days, it defines expiration date for new secret
-* $secret.Tags["CredentialId"] - [ServiceType] key id (key1/key2)
+* $secret.Tags["CredentialId"] - [ServiceType] credential id
 * $secret.Tags["ProviderAddress"] - [ServiceType] Resource Id
 
 You can create new secret with above tags and [ServiceType] key as value or add those tags to existing secret with [ServiceType] key. For automated rotation expiry date will also be required - key vault triggers 'SecretNearExpiry' event 30 days before expiry.
