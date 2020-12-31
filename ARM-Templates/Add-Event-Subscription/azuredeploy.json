@@ -10,7 +10,7 @@
             }
         },
         "[ServiceType]Name": {
-            "defaultValue": "[concat(resourceGroup().name, '[ServiceType]2')]",
+            "defaultValue": "",
             "type": "String",
             "metadata": {
                 "description": "The name of the [ServiceType] with keys to rotate."
@@ -24,14 +24,14 @@
             }
         },
         "keyVaultName": {
-            "defaultValue": "[concat(resourceGroup().name, '-kv')]",
+            "defaultValue": "",
             "type": "String",
             "metadata": {
                 "description": "The name of the key vault where key is stored."
             }
         },
         "functionAppName": {
-            "defaultValue": "[concat(resourceGroup().name, '-[ServiceType]key-rotation-fnapp')]",
+            "defaultValue": "[concat(resourceGroup().name, '-[ServiceType]-rotation-fnapp')]",
             "type": "String",
             "metadata": {
                 "description": "The name of the function app that you wish to use."
