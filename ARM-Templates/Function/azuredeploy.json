@@ -56,7 +56,7 @@
             }
         },
         "repoURL": {
-            "defaultValue": "<address to github repo i.e. https://github.com/Azure-Samples/KeyVault-Rotation-StorageAccount-PowerShell.git>",
+            "defaultValue": "<address to github repo i.e. https://github.com/Azure/KeyVault-Secrets-Rotation-StorageAccount-PowerShell.git>",
             "type": "String",
             "metadata": {
                 "description": "The URL for the GitHub repository that contains the project to deploy."
