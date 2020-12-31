@@ -91,21 +91,20 @@
                             }
                         },
                         {
+                            "name": "grant-access",
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2019-10-01",
+                            "subscriptionId": "[subscription().subscriptionId]",
+                            "resourceGroup": "[parameters('[ServiceType]RG')]",
+                            "dependsOn": [],
+                            "properties": {
+                                "mode": "Incremental",
+                                "template": {
+                                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                                    "contentVersion": "1.0.0.0",
+                                    "resources": [
+                                        {
                             //EXAMPLE OF GRANTING ACCESS TO STORAGE
-
-                            // "name": "storage-grant-access",
-                            // "type": "Microsoft.Resources/deployments",
-                            // "apiVersion": "2019-10-01",
-                            // "subscriptionId": "[subscription().subscriptionId]",
-                            // "resourceGroup": "[parameters('storageAccountRG')]",
-                            // "dependsOn": [],
-                            // "properties": {
-                            //     "mode": "Incremental",
-                            //     "template": {
-                            //         "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-                            //         "contentVersion": "1.0.0.0",
-                            //         "resources": [
-                            //             {
                             //                 "type": "Microsoft.Storage/storageAccounts/providers/roleAssignments",
                             //                 "apiVersion": "2018-09-01-preview",
                             //                 "name": "[concat(parameters('storageAccountName'), '/Microsoft.Authorization/', guid(concat(parameters('storageAccountName'),reference(resourceId('Microsoft.Web/sites', parameters('functionAppName')),'2019-08-01', 'Full').identity.principalId)))]",
@@ -116,10 +115,10 @@
                             //                     "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '81a9662b-bebf-436f-a333-f67b29880f12')]",
                             //                     "principalId": "[reference(resourceId('Microsoft.Web/sites', parameters('functionAppName')),'2019-08-01', 'Full').identity.principalId]"
                             //                 }
-                            //             }
-                            //         ]
-                            //     }
-                            // }
+                                        }
+                                    ]
+                                }
+                            }
                         }
                     ]
                 }
