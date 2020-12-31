@@ -12,7 +12,7 @@ function RegenerateCredential($credentialId, $providerAddress){
     $resourceGroupName = ($providerAddress -split '/')[4]
     
     #Regenerate key 
-    New-AzStorageAccountKey -ResourceGroupName $resourceGroupName -Name $storageAccountName -KeyName $credentialId
+    $operationResult = New-AzStorageAccountKey -ResourceGroupName $resourceGroupName -Name $storageAccountName -KeyName $credentialId
     $newCredentialValue = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $storageAccountName|where KeyName -eq $credentialId).value 
     return $newCredentialValue
     
@@ -65,7 +65,7 @@ function RoatateSecret($keyVaultName,$secretName){
     Write-Host "Alternate credential id: $alternateCredentialId"
 
     #Regenerate alternate access credential in provider
-    $newCredentialValue = (RegenerateCredential $alternateCredentialId $providerAddress)[-1]
+    $newCredentialValue = (RegenerateCredential $alternateCredentialId $providerAddress)
     Write-Host "Credential regenerated. Credential Id: $alternateCredentialId Resource Id: $providerAddress"
 
     #Add new credential to Key Vault
