@@ -37,10 +37,8 @@ Functions are using Function App identity to access Key Vault and existing secre
 
 ARM templates available:
 
-* Secrets rotation Azure Function and configuration deployment template - it creates and deploys function app and function code, creates necessary permissions, and Key Vault event subscription for Near Expiry Event for individual secret (secret name can be provided as parameter)
-* Add event subscription to existing Azure Function deployment template - function can be used for multiple services for rotation. This template creates new event subscription for secret and necessary permissions to existing function.
-
-[ARM templates link](./ARM-Templates/Readme.md)
+* [Secrets rotation Azure Function and configuration deployment template](./ARM-Templates/Readme.md) - it creates and deploys function app and function code, creates necessary permissions, and Key Vault event subscription for Near Expiry Event for individual secret (secret name can be provided as parameter)
+* [Add event subscription to existing Azure Function deployment template](./ARM-Templates/Readme.md) - function can be used for multiple services for rotation. This template creates new event subscription for secret and necessary permissions to existing function.
 
 ## Demo
 
