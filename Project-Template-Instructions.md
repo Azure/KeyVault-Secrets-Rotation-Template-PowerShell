@@ -39,6 +39,7 @@ This template can be used to create project repository for secrets rotation func
 	    1. Add script for adding access to service/resource provider for your function on the bottom of the template file. Example for assigning role for Storage Account is provided as an example.
         1. Update "repoURL" default value in Function ARM template to your github url.
 1. Update 'README', 'CHANGELOG' and 'CONTRIBUTING' files. You can use Visual Studio Code replace in files functionality to replace [ServiceType] with service/resource provider type name.
+1. Update links for **Deploy to Azure** buttons in [README](./ARM-Templates/README.md) to point to new ARM templates in your github repository. You can find more information about deployment buttons [here](https://docs.microsoft.com/azure/azure-resource-manager/templates/deploy-to-azure-button)
 
     
 
