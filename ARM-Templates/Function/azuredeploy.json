@@ -83,13 +83,13 @@
         {
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2018-02-01",
-            "name": "[concat(resourceGroup().name, '-rotation-fnapp-plan')]",
+            "name": "[concat(resourceGroup().name, '-[ServiceType]-rotation-fnapp-plan')]",
             "location": "[resourceGroup().location]",
             "sku": {
                 "name": "[variables('appServiceSKU')]"
             },
             "properties": {
-                "name": "[concat(resourceGroup().name, '-rotation-fnapp-plan')]"
+                "name": "[concat(resourceGroup().name, '-[ServiceType]-rotation-fnapp-plan')]"
                
             }
         },

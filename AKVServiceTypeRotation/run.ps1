@@ -13,7 +13,7 @@ function RegenerateCredential($credentialId, $providerAddress){
     
     #Regenerate key 
     New-AzStorageAccountKey -ResourceGroupName $resourceGroupName -Name $storageAccountName -KeyName $credentialId
-    $credentialValue = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $storageAccountName|where KeyName -eq $credentialId).value 
+    $newCredentialValue = (Get-AzStorageAccountKey -ResourceGroupName $resourceGroupName -AccountName $storageAccountName|where KeyName -eq $credentialId).value 
     return $newCredentialValue
     
     #>
@@ -80,7 +80,7 @@ function RoatateSecret($keyVaultName,$secretName){
 
     Write-Host "New credential added to Key Vault. Secret Name: $secretName"
 }
-
+$ErrorActionPreference = "Stop"
 # Make sure to pass hashtables to Out-String so they're logged correctly
 $eventGridEvent | ConvertTo-Json | Write-Host
 
