@@ -14,7 +14,7 @@ This project framework provides the following features:
 
 * ARM template for function deployment
 
-* ARM template for adding storage account key to existing function
+* ARM template for adding [ServiceType] key to existing function
 
 ## Getting Started
 
@@ -28,10 +28,10 @@ You can create new secret with above tags and [ServiceType] key as value or add 
 
 There are two available functions performing same rotation:
 
-* AKV[ServiceType]Rotation - event triggered function, performs storage account key rotation triggered by Key Vault events. In this setup Near Expiry event is used which is published 30 days before expiration
+* AKV[ServiceType]Rotation - event triggered function, performs [ServiceType] key rotation triggered by Key Vault events. In this setup Near Expiry event is used which is published 30 days before expiration
 * AKV[ServiceType]RotationHttp - on-demand function with KeyVaultName and Secret name as parameters
 
-Functions are using Function App identity to access Key Vault and existing secret "CredentialId" tag with storage account key id (key1/key2) and "ProviderAddress" with Storage Account Resource Id.
+Functions are using Function App identity to access Key Vault and existing secret "CredentialId" tag with [ServiceType] key id (key1/key2) and "ProviderAddress" with [ServiceType] Resource Id.
 
 ### Installation
 
