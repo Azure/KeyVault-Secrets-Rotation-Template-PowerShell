@@ -1,8 +1,8 @@
-## Key Vault Rotation Function for [ServiceType] Key Changelog
+## Key Vault Rotation Function for [ServiceType] Changelog
 
-<a name="keyvault-rotation-storageaccountkey-powershell"></a>
+<a name="keyvault-rotation-[ServiceType]-powershell"></a>
 
-# Keyvault-Rotation-[ServiceType]Key-PowerShell (2020-12-22)
+# Keyvault-Rotation-[ServiceType]-PowerShell (2020-12-22)
 
 *Features*
 
