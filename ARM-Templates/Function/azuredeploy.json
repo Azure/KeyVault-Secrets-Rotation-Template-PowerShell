@@ -239,7 +239,9 @@
             "apiVersion": "2019-10-01",
             "subscriptionId": "[subscription().subscriptionId]",
             "resourceGroup": "[parameters('[ServiceType]RG')]",
-            "dependsOn": [],
+            "dependsOn": [
+                 "[resourceId('Microsoft.Web/sites', parameters('functionAppName'))]"
+            ],
             "properties": {
                 "mode": "Incremental",
                 "template": {
