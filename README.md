@@ -1,4 +1,4 @@
-# ###THIS IS TEMPLATE PROJECT FOR SECRET ROTATION FUNCTIONS. FOLLOW [THIS](https://github.com/Azure/KeyVault-Secrets-Rotation-Template-PowerShell) STEPS TO CREATE NEW SECRETS ROTATION FUNCTION PROJECT REPOSITORY###.
+# ###THIS IS TEMPLATE PROJECT FOR SECRET ROTATION FUNCTIONS. FOLLOW [THIS](https://github.com/Azure/KeyVault-Secrets-Rotation-Template-PowerShell/blob/main/Project-Template-Instructions.md) STEPS TO CREATE NEW SECRETS ROTATION FUNCTION PROJECT REPOSITORY###.
 
 # KeyVault-Secrets-Rotation-[ServiceType]-PowerShell
 
