@@ -37,8 +37,8 @@ Functions are using Function App identity to access Key Vault and existing secre
 
 ARM templates available:
 
-* [Secrets rotation Azure Function and configuration deployment template](./ARM-Templates/Readme.md) - it creates and deploys function app and function code, creates necessary permissions, and Key Vault event subscription for Near Expiry Event for individual secret (secret name can be provided as parameter)
-* [Add event subscription to existing Azure Function deployment template](./ARM-Templates/Readme.md) - function can be used for multiple services for rotation. This template creates new event subscription for secret and necessary permissions to existing function.
+* [Secrets rotation Azure Function and configuration deployment template](https://github.com/Azure/KeyVault-Secrets-Rotation-Template-PowerShell/blob/main/ARM-Templates/Readme.md) - it creates and deploys function app and function code, creates necessary permissions, and Key Vault event subscription for Near Expiry Event for individual secret (secret name can be provided as parameter)
+* [Add event subscription to existing Azure Function deployment template](https://github.com/Azure/KeyVault-Secrets-Rotation-Template-PowerShell/blob/main/ARM-Templates/Readme.md) - function can be used for multiple services for rotation. This template creates new event subscription for secret and necessary permissions to existing function.
 
 ## Demo
 
@@ -47,4 +47,4 @@ You can find example for Storage Account rotation in tutorial below:
 
 **Project template information**:
 
-This project was generated using [this](https://github.com/Azure/KeyVault-Secrets-Rotation-Template-PowerShell) template. You can find instructions [here](./Project-Template-Instructions.md)
+This project was generated using [this](https://github.com/Azure/KeyVault-Secrets-Rotation-Template-PowerShell) template. You can find instructions [here](https://github.com/Azure/KeyVault-Secrets-Rotation-Template-PowerShell/blob/main/Project-Template-Instructions.md)
