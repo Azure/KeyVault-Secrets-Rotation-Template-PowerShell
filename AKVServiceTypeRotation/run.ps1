@@ -45,11 +45,17 @@ function AddSecretToKeyVault($keyVAultName,$secretName,$secretvalue,$exprityDate
 
 }
 
-function RoatateSecret($keyVaultName,$secretName){
+function RoatateSecret($keyVaultName,$secretName,$secretVersion){
     #Retrieve Secret
     $secret = (Get-AzKeyVaultSecret -VaultName $keyVAultName -Name $secretName)
     Write-Host "Secret Retrieved"
     
+    If($secret.Version -ne $secretVersion){
+        #if current version is different than one retrived in event
+        Write-Host "Secret version is already rotated"
+        return 
+    }
+
     #Retrieve Secret Info
     $validityPeriodDays = $secret.Tags["ValidityPeriodDays"]
     $credentialId=  $secret.Tags["CredentialId"]
@@ -85,12 +91,14 @@ $ErrorActionPreference = "Stop"
 $eventGridEvent | ConvertTo-Json | Write-Host
 
 $secretName = $eventGridEvent.subject
+$secretVersion = $eventGridEvent.data.Version
 $keyVaultName = $eventGridEvent.data.VaultName
+
 Write-Host "Key Vault Name: $keyVAultName"
 Write-Host "Secret Name: $secretName"
+Write-Host "Secret Version: $secretVersion"
 
 #Rotate secret
 Write-Host "Rotation started."
-RoatateSecret $keyVAultName $secretName
+RoatateSecret $keyVAultName $secretName $secretVersion
 Write-Host "Secret Rotated Successfully"
-
