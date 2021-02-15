@@ -43,6 +43,26 @@
             "metadata": {
                 "description": "The name of the secret where [ServiceType] keys are stored."
             }
+        },
+        "deploySecretWith[ServiceType]KeyToKeyVault": {
+            "defaultValue": "true",
+            "type": "bool",
+            "metadata": {
+                "description": "Add [ServiceType] key to key vault. New secret is created with key as value"
+            }
+        },
+        "secretExpirationDateUnixTime": {
+            "type": "int",
+            "metadata": {
+                "description": "Expiry date in seconds since 1970-01-01T00:00:00Z."
+            }
+        },
+		"secretValidityPeriodDays": {
+            "defaultValue": 90,
+            "type": "int",
+            "metadata": {
+                "description": "Secret validity period days. It is used to calculate expiration date for a secret after rotation"
+            }
         }
        
     },
@@ -52,7 +72,7 @@
     },
     "resources": [
         {
-            "name": "kv-event-subscription",
+            "name": "kv-event-subscription-and-secret-deployment",
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2019-10-01",
             "subscriptionId": "[subscription().subscriptionId]",
@@ -90,6 +110,26 @@
                                 }
                             }
                         },
+                        //EXAMPLE OF STORAGE ACCOUNT KEY DEPLOYMENT
+                        // {
+                        //     "type": "Microsoft.KeyVault/vaults/secrets",
+                        //     "apiVersion": "2019-09-01",
+                        //     "condition": "[parameters('deploySecretWith[ServiceType]KeyToKeyVault')]",
+                        //     "name": "[concat(parameters('keyVaultName'), '/', parameters('secretName'))]",
+                        //     "location": "[resourceGroup().location]",
+                        //     "dependsOn": [],
+                        //     "tags": {
+                        //         "ValidityPeriodDays":"[parameters('secretValidityPeriodDays')]",
+                        //         "CredentialId":"key1",
+                        //         "ProviderAddress":"[variables('ProviderResourceId')]"
+                        //     },
+                        //     "properties": {
+                        //         "value": "[listKeys(variables('ProviderResourceId'), '2019-04-01').keys[0].value]",
+                        //         "attributes": {
+                        //             "exp": "[parameters('secretExpirationDateUnixTime')]"
+                        //         }
+                        //     }
+                        // }
                         {
                             "name": "grant-access",
                             "type": "Microsoft.Resources/deployments",

@@ -12,9 +12,9 @@ This project framework provides the following features:
 
 * Rotation function for [ServiceType] key triggered by HTTP call (AKV[ServiceType]RotationHttp)
 
-* ARM template for function deployment
+* ARM template for function deployment with secret deployment (optional)
 
-* ARM template for adding [ServiceType] key to existing function
+* ARM template for adding [ServiceType] key to existing function with secret deployment (optional)
 
 ## Getting Started
 
@@ -37,8 +37,8 @@ Functions are using Function App identity to access Key Vault and existing secre
 
 ARM templates available:
 
-* [Secrets rotation Azure Function and configuration deployment template](https://github.com/Azure/KeyVault-Secrets-Rotation-Template-PowerShell/blob/main/ARM-Templates/Readme.md) - it creates and deploys function app and function code, creates necessary permissions, and Key Vault event subscription for Near Expiry Event for individual secret (secret name can be provided as parameter)
-* [Add event subscription to existing Azure Function deployment template](https://github.com/Azure/KeyVault-Secrets-Rotation-Template-PowerShell/blob/main/ARM-Templates/Readme.md) - function can be used for multiple services for rotation. This template creates new event subscription for secret and necessary permissions to existing function.
+* [Secrets rotation Azure Function and configuration deployment template](https://github.com/Azure/KeyVault-Secrets-Rotation-Template-PowerShell/blob/main/ARM-Templates/Readme.md) - it creates and deploys function app and function code, creates necessary permissions, Key Vault event subscription for Near Expiry Event for individual secret (secret name can be provided as parameter), and deploys secret with Redis key (optional)
+* [Add event subscription to existing Azure Function deployment template](https://github.com/Azure/KeyVault-Secrets-Rotation-Template-PowerShell/blob/main/ARM-Templates/Readme.md) - function can be used for multiple services for rotation. This template creates new event subscription for secret and necessary permissions to existing function, and deploys secret with Redis key (optional)
 
 ## Demo
 
