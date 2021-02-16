@@ -45,6 +45,9 @@ ARM templates available:
 You can find example for Storage Account rotation in tutorial below:
 [Automate the rotation of a secret for resources that have two sets of authentication credentials](https://docs.microsoft.com/azure/key-vault/secrets/tutorial-rotation-dual)
 
+Youtube:
+https://youtu.be/qcdVbXJ7e-4
+
 **Project template information**:
 
 This project was generated using [this](https://github.com/Azure/KeyVault-Secrets-Rotation-Template-PowerShell) template. You can find instructions [here](https://github.com/Azure/KeyVault-Secrets-Rotation-Template-PowerShell/blob/main/Project-Template-Instructions.md)
